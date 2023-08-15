@@ -20,6 +20,11 @@ describe Genre do
         expect(@new_genre_req).to be_an_instance_of Genre
         expect(@new_genre_id).to be_an_instance_of Genre
       end
+
+      it 'should have a valid \'id\' not \'nil\'' do
+        expect(@new_genre_req.id).not_to be_nil
+        expect(@new_genre_id.id).not_to be_nil
+      end
     end
   end
 end
