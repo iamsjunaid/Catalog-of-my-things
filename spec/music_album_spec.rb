@@ -10,7 +10,7 @@ describe MusicAlbum do
       }
       @music_album_req = MusicAlbum.new(music_album_params_req)
       music_album_params_id = {
-        id: 99999,
+        id: 999_999,
         publish_date: '2023-08-01',
         on_spotify: true
       }
@@ -21,6 +21,13 @@ describe MusicAlbum do
       it 'should create an instance of \'MusicAlbum\' class' do
         expect(@music_album_req).to be_an_instance_of(MusicAlbum)
         expect(@music_album_id).to be_an_instance_of(MusicAlbum)
+      end
+
+      it 'should inherits from \'Item\' class' do
+        expect(@music_album_req).to be_kind_of(Item)
+        expect(@music_album_id).to be_kind_of(Item)
+        expect(@music_album_req.class.superclass).to eql(Item)
+        expect(@music_album_id.class.superclass).to eql(Item)
       end
     end
   end
