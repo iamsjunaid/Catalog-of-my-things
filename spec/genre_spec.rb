@@ -67,6 +67,11 @@ describe Genre do
         @new_genre_req.add_item(@new_item)
         expect(@new_genre_req.items).to include(@new_item)
       end
+
+      it 'should set \'Genre\' instance as a property of the input \'Item\' instance' do
+        @new_genre_req.add_item(@new_item)
+        expect(@new_item.genre).to be(@new_genre_req)
+      end
     end
   end
 end
