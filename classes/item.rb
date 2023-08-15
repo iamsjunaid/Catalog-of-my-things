@@ -24,7 +24,7 @@ class Item
 
   def can_be_archived?
     current_date = Date.today
-    year = current_date.year - @published_date.year
+    year = current_date.year - @publish_date.year
     year > 10
   end
 end
