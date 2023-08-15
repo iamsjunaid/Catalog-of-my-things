@@ -71,6 +71,13 @@ describe MusicAlbum do
         expect(@music_album_id.genre).not_to be_nil
         expect(@music_album_id.genre).to be_an_instance_of(Genre)
       end
+
+      it '\'MusicAlbum\' should be included in the \'items\' collection of \'Genre\'' do
+        @new_genre.add_item(@music_album_req)
+        @new_genre.add_item(@music_album_id)
+        expect(@new_genre.items).to include(@music_album_req)
+        expect(@new_genre.items).to include(@music_album_id)
+      end
     end
   end
 end
