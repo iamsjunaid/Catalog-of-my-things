@@ -79,5 +79,12 @@ describe MusicAlbum do
         expect(@new_genre.items).to include(@music_album_id)
       end
     end
+
+    context '#can_be_archived? method' do
+      it 'should exists and is \'private\'' do
+        expect(@music_album_req.private_methods).to include(:can_be_archived?)
+        expect(@music_album_req.private_methods(:can_be_archived?)).to be_truthy
+      end
+    end
   end
 end
