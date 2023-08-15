@@ -1,6 +1,8 @@
 require 'date'
 
 class Item
+  attr_reader :genre
+
   def initialize(params)
     @id = params[:id] || Random.rand(1...1_000)
     @publish_date = Date.parse(params[:publish_date])
