@@ -19,11 +19,10 @@ end
 def select_option(user_choice)
   case user_choice
 
-  when 1...6
+  when 1..6
     list_item(user_choice)
 
-
-  when 7...9
+  when 7..9
     add_item(user_choice)
 
   when 10
@@ -49,15 +48,58 @@ end
 
 def add_item(user_choice)
   case user_choice
-  when 7 then puts '# add_book'
-  when 8 then puts '# add_music_album'
-  when 9 then puts '# add_game'
+  when 7
+    puts '# add_book'
+    ask_parameters('Book')
+    # p Genre.new(params)
+    # p Label.new(params)
+    # p Item.new(params)
+  when 8
+    puts '# add_music_album'
+    ask_parameters('Album')
+    # p Genre.new(params)
+    # p Label.new(params)
+    # p Item.new(params)
+  when 9
+    puts '# add_game'
+    ask_parameters('Game')
+    # p Genre.new(params)
+    # p Label.new(params)
+    # p Item.new(params)
   end
   show_menu
 end
 
 def exit
   puts 'Goodbye!'
+end
+
+def ask_for(type, message)
+  print "Type [#{type}] #{message}: "
+  gets.chomp
+end
+
+def ask_parameters(type)
+  parameters = {}
+  parameters[:name] = ask_for(type, 'Genre name')
+  parameters[:first_name] = ask_for(type, 'Author first name')
+  parameters[:last_name] = ask_for(type, 'Author last name')
+  parameters[:title] = ask_for(type, 'Label title')
+  parameters[:color] = ask_for(type, 'Label color')
+  parameters[:publish_date] = ask_for(type, 'publish date (yyyy/mm/dd)')
+
+  case type
+  when 'Book'
+    parameters[:publisher] = ask_for(type, 'Book publisher')
+    parameters[:cover_state] = ask_for(type, 'Book cover state')
+  when 'Album'
+    parameters[:on_spotify] = ask_for(type, 'Album is on spotify (y/n)').downcase == 'y'
+  when 'Game'
+    parameters[:multiplayer] = ask_for(type, 'Game is multiplayer (y/n)').downcase == 'y'
+    parameters[:last_played_at] = ask_for(type, 'Game was last played at (yyyy/mm/dd)')
+  end
+
+  parameters
 end
 
 def main
