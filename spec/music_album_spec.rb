@@ -85,6 +85,21 @@ describe MusicAlbum do
         expect(@music_album_req.private_methods).to include(:can_be_archived?)
         expect(@music_album_req.private_methods(:can_be_archived?)).to be_truthy
       end
+
+      context 'should return \'true\' if' do
+        music_album1 = MusicAlbum.new({ publish_date: '2010-01-01', on_spotify: true })
+        music_album2 = MusicAlbum.new({ publish_date: '2021-01-01', on_spotify: true })
+        music_album3 = MusicAlbum.new({ publish_date: '2021-01-01', on_spotify: false })
+        music_album4 = MusicAlbum.new({ publish_date: '2010-01-01', on_spotify: false })
+        it 'parent\'s method return \'true\' AND \'on_spotify\' is \'true\'' do
+          expect(music_album1.send(:can_be_archived?)).to be_truthy
+        end
+        it 'otherwise, should return \'false\'' do
+          expect(music_album2.send(:can_be_archived?)).to be_falsy
+          expect(music_album3.send(:can_be_archived?)).to be_falsy
+          expect(music_album4.send(:can_be_archived?)).to be_falsy
+        end
+      end
     end
   end
 end
