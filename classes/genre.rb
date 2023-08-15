@@ -6,5 +6,6 @@ class Genre
   end
 
   def add_item(item)
+    @items << item unless @items.include?(item)
   end
 end
