@@ -1,4 +1,5 @@
 require_relative '../classes/genre'
+require_relative '../classes/item'
 
 describe Genre do
   describe 'unit tests for \'Genre\' class' do
@@ -13,6 +14,15 @@ describe Genre do
       }
       @new_genre_req = Genre.new(@genre_params_req)
       @new_genre_id = Genre.new(@genre_params_id)
+
+      @genre_instance = instance_double(Genre)
+
+      # create an Item instance
+      item_params_id = {
+        id: 1,
+        publish_date: '2023-08-01'
+      }
+      @new_item = Item.new(item_params_id)
     end
 
     context 'when creating a new \'Genre\'' do
@@ -43,9 +53,14 @@ describe Genre do
       end
     end
 
-    context '#add-item method' do
+    context '#add_item method' do
       it 'should exists' do
         expect(@new_genre_req).to respond_to(:add_item)
+      end
+
+      it 'should receive one parameter as input, an \'Item\' instance' do
+        allow(@genre_instance).to receive(:add_item).with(instance_of(Item)).exactly(1)
+        @genre_instance.add_item(@new_item)
       end
     end
   end
