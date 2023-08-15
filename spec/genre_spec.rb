@@ -42,5 +42,11 @@ describe Genre do
         expect(@new_genre_id.items).to be_an_instance_of(Array)
       end
     end
+
+    context '#add-item method' do
+      it 'should exists' do
+        expect(@new_genre_req).to respond_to(:add_item)
+      end
+    end
   end
 end
