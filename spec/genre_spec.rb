@@ -21,9 +21,18 @@ describe Genre do
         expect(@new_genre_id).to be_an_instance_of Genre
       end
 
-      it 'should have a valid \'id\' not \'nil\'' do
+      it 'should have a valid \'id\' not \'nil\' but an \'Integer\'' do
         expect(@new_genre_req.id).not_to be_nil
         expect(@new_genre_id.id).not_to be_nil
+        expect(@new_genre_req.id).to be_an_instance_of(Integer)
+        expect(@new_genre_id.id).to be_an_instance_of(Integer)
+      end
+
+      it 'should have a valid \'name\' not \'nil\' but a \'String\'' do
+        expect(@new_genre_req.name).not_to be_nil
+        expect(@new_genre_id.name).not_to be_nil
+        expect(@new_genre_req.name).to be_an_instance_of(String)
+        expect(@new_genre_id.name).to be_an_instance_of(String)
       end
     end
   end
