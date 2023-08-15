@@ -99,6 +99,13 @@ To run the tests, execute the following command:
 - GitHub: [@iamsjunaid](https://github.com/iamsjunaid)
 - LinkedIn: [@JunaidAhmedSyed](https://www.linkedin.com/in/junaidahmedsyed/)
 
+
+👤 **Luis Zubia**
+
+- GitHub: [@luigirazum](https://github.com/luigirazum)
+- LinkedIn: [Connect](https://www.linkedin.com/in/luiszubia/)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
