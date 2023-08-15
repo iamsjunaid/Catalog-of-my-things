@@ -30,5 +30,14 @@ describe MusicAlbum do
         expect(@music_album_id.class.superclass).to eql(Item)
       end
     end
+
+    context 'when creating a new \'MusicAlbum\'' do
+      it 'should have a valid \'id\' value' do
+        expect(@music_album_req.id).not_to be_nil
+        expect(@music_album_id.id).not_to be_nil
+        expect(@music_album_req.id).to be_an_instance_of(Integer)
+        expect(@music_album_id.id).to be_an_instance_of(Integer)
+      end
+    end
   end
 end
