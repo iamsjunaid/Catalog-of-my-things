@@ -1,7 +1,7 @@
 require 'date'
 
 class Item
-  attr_reader :genre
+  attr_reader :id, :genre
 
   def initialize(params)
     @id = params[:id] || Random.rand(1...1_000)
