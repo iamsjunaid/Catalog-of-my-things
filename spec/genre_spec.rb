@@ -62,6 +62,11 @@ describe Genre do
         allow(@genre_instance).to receive(:add_item).with(instance_of(Item)).exactly(1)
         @genre_instance.add_item(@new_item)
       end
+
+      it 'should add the input \'Item\' to the collection of \'items\'' do
+        @new_genre_req.add_item(@new_item)
+        expect(@new_genre_req.items).to include(@new_item)
+      end
     end
   end
 end
