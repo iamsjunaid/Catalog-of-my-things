@@ -11,7 +11,7 @@ class App
   end
 
   def load(collection)
-    return [] if %i[genres albums].include?(collection)
+    [] if %i[genres albums].include?(collection)
   end
 
   def ask_for(type, message)
