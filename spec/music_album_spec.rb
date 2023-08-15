@@ -38,6 +38,13 @@ describe MusicAlbum do
         expect(@music_album_req.id).to be_an_instance_of(Integer)
         expect(@music_album_id.id).to be_an_instance_of(Integer)
       end
+
+      it 'should have a valid \'publish_date\' value' do
+        expect(@music_album_req.publish_date).not_to be_nil
+        expect(@music_album_id.publish_date).not_to be_nil
+        expect(@music_album_req.publish_date).to be_an_instance_of(Date)
+        expect(@music_album_id.publish_date).to be_an_instance_of(Date)
+      end
     end
   end
 end
