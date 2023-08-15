@@ -1,4 +1,5 @@
 require_relative '../classes/music_album'
+require_relative '../classes/genre'
 
 describe MusicAlbum do
   describe 'unit tests for \'MusicAlbum\' class' do
@@ -15,6 +16,13 @@ describe MusicAlbum do
         on_spotify: true
       }
       @music_album_id = MusicAlbum.new(music_album_params_id)
+
+      # params to create a Genre instance
+      @genre_params_id = {
+        id: 9999,
+        name: 'music album genre'
+      }
+      @new_genre = Genre.new(@genre_params_id)
     end
 
     context 'when creating a new \'MusicAlbum\'' do
@@ -51,6 +59,17 @@ describe MusicAlbum do
         expect(@music_album_id.on_spotify).not_to be_nil
         expect(@music_album_req.on_spotify).to be_kind_of(FalseClass).or be_kind_of(TrueClass)
         expect(@music_album_id.on_spotify).to be_kind_of(FalseClass).or be_kind_of(TrueClass)
+      end
+    end
+
+    context 'when a \'Genre\' is set to a \'MusicAlbum\'' do
+      it '\'MusicAlbum\' should have a valid \'genre\' property' do
+        @new_genre.add_item(@music_album_req)
+        @new_genre.add_item(@music_album_id)
+        expect(@music_album_req.genre).not_to be_nil
+        expect(@music_album_req.genre).to be_an_instance_of(Genre)
+        expect(@music_album_id.genre).not_to be_nil
+        expect(@music_album_id.genre).to be_an_instance_of(Genre)
       end
     end
   end
