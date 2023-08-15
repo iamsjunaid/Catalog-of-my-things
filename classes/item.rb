@@ -7,6 +7,10 @@ class Item
     @archived = params[:archived] || false
   end
 
+  def add_genre(genre)
+    @genre = genre
+  end
+
   def move_to_archive
     return unless can_be_archived?
 
