@@ -5,3 +5,19 @@ CREATE TABLE genres (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255)
 );
+
+-- Create the 'music_albums' table
+CREATE TABLE music_albums (
+  id SERIAL PRIMARY KEY,
+  publish_date DATE,
+  archived BOOLEAN
+  on_spotify BOOLEAN NOT NULL,
+  genre_id INT NOT NULL,
+  author_id INT NOT NULL,
+  source_id INT NOT NULL,
+  label_id INT NOT NULL,
+  FOREIGN KEY (genre_id) REFERENCES genres(id),
+  FOREIGN KEY (author_id) REFERENCES authors(id),
+  FOREIGN KEY (source_id) REFERENCES sources(id),
+  FOREIGN KEY (label_id) REFERENCES labels(id)
+);
