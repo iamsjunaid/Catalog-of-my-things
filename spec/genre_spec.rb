@@ -34,6 +34,13 @@ describe Genre do
         expect(@new_genre_req.name).to be_an_instance_of(String)
         expect(@new_genre_id.name).to be_an_instance_of(String)
       end
+
+      it 'should not have any \'items\'' do
+        expect(@new_genre_req.items).to be_empty
+        expect(@new_genre_id.items).to be_empty
+        expect(@new_genre_req.items).to be_an_instance_of(Array)
+        expect(@new_genre_id.items).to be_an_instance_of(Array)
+      end
     end
   end
 end
