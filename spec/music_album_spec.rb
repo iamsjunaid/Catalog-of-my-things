@@ -45,6 +45,13 @@ describe MusicAlbum do
         expect(@music_album_req.publish_date).to be_an_instance_of(Date)
         expect(@music_album_id.publish_date).to be_an_instance_of(Date)
       end
+
+      it 'should have a valid \'on_spotify\' value' do
+        expect(@music_album_req.on_spotify).not_to be_nil
+        expect(@music_album_id.on_spotify).not_to be_nil
+        expect(@music_album_req.on_spotify).to be_kind_of(FalseClass).or be_kind_of(TrueClass)
+        expect(@music_album_id.on_spotify).to be_kind_of(FalseClass).or be_kind_of(TrueClass)
+      end
     end
   end
 end
