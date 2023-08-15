@@ -1,10 +1,10 @@
 require 'date'
 
 class Item
-  def initialize(published_date, id, archived: false)
-    @id = id.nil? ? Random.rand(1...1000) : id
-    @published_date = Date.parse(published_date)
-    @archived = archived
+  def initialize(params)
+    @id = params[:id] || Random.rand(1...1_000)
+    @publish_date = Date.parse(params[:publish_date])
+    @archived = params[:archived] || false
   end
 
   def move_to_archive
