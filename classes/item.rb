@@ -5,7 +5,7 @@ class Item
   attr_accessor :publish_date
 
   def initialize(params)
-    @id = params[:id] || Random.rand(1...1_000)
+    @id = params[:id] || Random.rand(1...1000)
     @publish_date = Date.parse(params[:publish_date])
     @archived = params[:archived] || false
   end
