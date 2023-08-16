@@ -81,23 +81,23 @@ describe Book do
         expect(@book_req.private_methods).to include(:can_be_archived?)
         expect(Book.private_instance_methods(false)).to include(:can_be_archived?)
       end
-    
+
       context 'should return \'true\' if' do
         book1 = Book.new({ publish_date: '2020-01-01', cover_state: 'bad', publisher: 'Unknown' })
         book2 = Book.new({ publish_date: '2022-02-01', cover_state: 'good', publisher: 'Unknown' })
         book3 = Book.new({ publish_date: '2021-01-02', cover_state: 'bad', publisher: 'Unknown' })
         book4 = Book.new({ publish_date: '2021-02-02', cover_state: 'good', publisher: 'Unknown' })
-    
+
         it 'parent\'s method returns \'true\' AND \'cover_state\' is \'bad\'' do
           expect(book1.send(:can_be_archived?)).to be_truthy
           expect(book3.send(:can_be_archived?)).to be_truthy
         end
-    
+
         it 'should return \'false\' otherwise' do
           expect(book2.send(:can_be_archived?)).to be_falsy
           expect(book4.send(:can_be_archived?)).to be_falsy
         end
       end
-    end    
+    end
   end
 end
