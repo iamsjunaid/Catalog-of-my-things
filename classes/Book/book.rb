@@ -3,10 +3,10 @@ require_relative '../item'
 class Book < Item
   attr_accessor :cover_state, :publisher
 
-  def initialize(cover_state, publisher, publish_date, id = nil)
-    super(publish_date, id)
-    @cover_state = cover_state
-    @publisher = publisher
+  def initialize(params)
+    @id = params[:id] || Random.rand(1..1000)
+    @cover_state = params[:cover_state] || 'good'
+    @publisher = params[:publisher] || 'Unknown'
   end
 
   def can_be_archived
