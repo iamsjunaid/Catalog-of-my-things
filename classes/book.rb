@@ -22,10 +22,10 @@ class Book < Item
       "publish_date: #{@publish_date}",
       "cover_state: #{@cover_state}",
       "publisher: #{@publisher}",
-      "archived?: #{@archived ? 'yes' : 'no'}",
-      "\n       "
+      "archived?: #{@archived ? 'yes' : 'no'}"
     ]
 
+    properties.push("\n       ") unless @genre.nil? || @author.nil? || @label.nil?
     properties.push("genre: #{@genre.name}") unless @genre.nil?
     properties.push("author first_name: #{@author.first_name} last_name: #{@author.last_name}") unless @author.nil?
     properties.push("label title: #{@label.title} color: #{@label.color}") unless @label.nil?
