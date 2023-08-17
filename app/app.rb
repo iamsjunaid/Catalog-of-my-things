@@ -39,7 +39,13 @@ class App
   def generate_items(params_collection, type)
     params_collection.map do |params|
       item = create_item(type, params)
-      p params
+      genre = select_by(send(:genres), { id: params[:genre_id] }) if params.include?(:genre_id)
+      author = select_by(send(:authors), { id: params[:author_id] }) if params.include?(:author_id)
+      label = select_by(send(:labels), { id: params[:label_id] }) if params.include?(:label_id)
+      genre.add_item(item)
+      author.add_item(item)
+      label.add_item(item)
+      item
     end
   end
 
@@ -61,44 +67,6 @@ class App
   def save(filename = :all)
     file = FileHandler.new(folder: @data_dir)
     file.save(send(filename), filename)
-  end
-
-  def ask_for(type, message)
-    type = type.to_s.capitalize if type.is_a?(Symbol)
-    print "Type [#{type}] #{message}: "
-    gets.chomp
-  end
-
-  def ask_parameters(type)
-    parameters = {}
-    parameters[:name] = ask_for(type, 'Genre name')
-    parameters[:first_name] = ask_for(type, 'Author first name')
-    parameters[:last_name] = ask_for(type, 'Author last name')
-    parameters[:title] = ask_for(type, 'Label title')
-    parameters[:color] = ask_for(type, 'Label color')
-    parameters[:publish_date] = ask_for(type, 'publish date (yyyy/mm/dd)')
-
-    case type
-    when :book
-      parameters[:publisher] = ask_for(type, 'publisher')
-      parameters[:cover_state] = ask_for(type, 'cover state')
-    when :album
-      parameters[:on_spotify] = ask_for(type, 'is on spotify (y/n)').downcase == 'y'
-    when :game
-      parameters[:multiplayer] = ask_for(type, 'is multiplayer (y/n)').downcase == 'y'
-      parameters[:last_played_at] = ask_for(type, 'was last played at (yyyy/mm/dd)')
-    end
-
-    parameters
-  end
-
-  def exit
-    puts "\nThanks for using [ Catalog of Things ]...\nHave a nice day!"
-  end
-
-  def invalid
-    puts "Invalid input, please try again\n"
-    false
   end
 
   def execute(option)
@@ -162,30 +130,6 @@ class App
       Game.new(params)
     when :book
       Book.new(params)
-    end
-  end
-
-  def choose_target(type)
-    type.to_s.concat('s').to_sym
-  end
-
-  def choose_type(target)
-    target.to_s.sub(/s$/, '').to_sym
-  end
-
-  def menu
-    options = %w[books music_albums games genres labels authors book music_album game exit]
-    puts "\nWelcome to your [ Catalog of Things ]"
-    puts '-' * 60
-    options.each_with_index do |name, i|
-      case i
-      when 0..5 then option = 'List all'
-      when 6..8 then option = 'Add a'
-      when 9 then option = 'Exit'
-      end
-
-      name = name.split('_').join(' ') if name.include?('_')
-      puts "#{i + 1} - #{option}#{i < 9 ? " #{name}" : ''}"
     end
   end
 
