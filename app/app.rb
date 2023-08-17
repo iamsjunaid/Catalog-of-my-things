@@ -1,20 +1,27 @@
+require_relative '../classes/author'
 require_relative '../classes/genre'
+require_relative '../classes/label'
+require_relative '../classes/book'
+require_relative '../classes/game'
 require_relative '../classes/music_album'
 require_relative '../modules/utils'
 
 class App
   include Utils
-
-  attr_reader :genres, :albums
+  attr_reader :genres, :albums, :books, :labels, :games, :authors
 
   def initialize(params = { data_dir: 'data' })
     @data_dir = params[:data_dir]
+    @authors = params[:authors] || load(:authors)
     @genres = params[:genres] || load(:genres)
+    @labels = params[:labels] || load(:labels)
     @albums = params[:albums] || load(:albums)
+    @books = params[:books] || load(:books)
+    @games = params[:games] || load(:games)
   end
 
   def load(collection)
-    [] if %i[genres albums].include?(collection)
+    [] if %i[genres albums labels books games authors].include?(collection)
   end
 
   def save(filename = :all)
@@ -93,7 +100,9 @@ class App
     puts "Create a #{type == :album ? 'music album' : type}"
     params = ask_parameters(type)
     instances = {
-      genre: Genre.new(params)
+      genre: Genre.new(params),
+      author: Author.new(params),
+      label: Label.new(params)
     }
 
     # create the type instance Book, MusicAlbum, Game
@@ -115,6 +124,10 @@ class App
     case type
     when :album
       MusicAlbum.new(params)
+    when :game
+      Game.new(params)
+    when :book
+      Book.new(params)
     end
   end
 
