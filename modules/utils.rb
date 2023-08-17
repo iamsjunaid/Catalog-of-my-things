@@ -63,4 +63,80 @@ module Utils
       parse(objs)
     end
   end
+
+  def select_by(collection, params = {})
+    return false if collection.empty? || params.empty?
+
+    matches = []
+    collection.find do |elem|
+      matches = params.keys.map do |key|
+        next unless elem.respond_to?(key)
+
+        elem.send(key).eql?(params[key])
+      end
+      matches.all?
+    end
+  end
+
+  def ask_for(type, message)
+    type = type.to_s.capitalize if type.is_a?(Symbol)
+    print "Type [#{type}] #{message}: "
+    gets.chomp
+  end
+
+  def ask_parameters(type)
+    parameters = {}
+    parameters[:name] = ask_for(type, 'Genre name')
+    parameters[:first_name] = ask_for(type, 'Author first name')
+    parameters[:last_name] = ask_for(type, 'Author last name')
+    parameters[:title] = ask_for(type, 'Label title')
+    parameters[:color] = ask_for(type, 'Label color')
+    parameters[:publish_date] = ask_for(type, 'publish date (yyyy/mm/dd)')
+
+    case type
+    when :book
+      parameters[:publisher] = ask_for(type, 'publisher')
+      parameters[:cover_state] = ask_for(type, 'cover state')
+    when :album
+      parameters[:on_spotify] = ask_for(type, 'is on spotify (y/n)').downcase == 'y'
+    when :game
+      parameters[:multiplayer] = ask_for(type, 'is multiplayer (y/n)').downcase == 'y'
+      parameters[:last_played_at] = ask_for(type, 'was last played at (yyyy/mm/dd)')
+    end
+
+    parameters
+  end
+
+  def exit
+    puts "\nThanks for using [ Catalog of Things ]...\nHave a nice day!"
+  end
+
+  def invalid
+    puts "Invalid input, please try again\n"
+    false
+  end
+
+  def choose_target(type)
+    type.to_s.concat('s').to_sym
+  end
+
+  def choose_type(target)
+    target.to_s.sub(/s$/, '').to_sym
+  end
+
+  def menu
+    options = %w[books music_albums games genres labels authors book music_album game exit]
+    puts "\nWelcome to your [ Catalog of Things ]"
+    puts '-' * 60
+    options.each_with_index do |name, i|
+      case i
+      when 0..5 then option = 'List all'
+      when 6..8 then option = 'Add a'
+      when 9 then option = 'Exit'
+      end
+
+      name = name.split('_').join(' ') if name.include?('_')
+      puts "#{i + 1} - #{option}#{i < 9 ? " #{name}" : ''}"
+    end
+  end
 end
