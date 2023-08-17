@@ -14,6 +14,10 @@ class Genre
     item.add_genre(self)
   end
 
+  def to_json(*_args)
+    to_h.to_json
+  end
+
   private
 
   def to_s
