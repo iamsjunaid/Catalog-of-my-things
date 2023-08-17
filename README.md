@@ -97,7 +97,7 @@ To run the tests, execute the following command:
 👤 **Junaid Syed**
 
 - GitHub: [@iamsjunaid](https://github.com/iamsjunaid)
-- LinkedIn: [@JunaidAhmedSyed](https://www.linkedin.com/in/junaidahmedsyed/)
+- Twitter: [@JunaidAhmedSd](https://twitter.com/junaidahmedsd)
 
 
 👤 **Luis Zubia**
