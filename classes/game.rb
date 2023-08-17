@@ -9,3 +9,4 @@ class Game < Item
     @last_played_at = Date.parse(params[:last_played_at])
   end
 end
+# resolved conflicts
