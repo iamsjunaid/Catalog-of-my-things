@@ -70,7 +70,7 @@ describe Label do
         expect(@new_label_req.items).to include(@new_item)
       end
 
-      it 'should add only once the input \'Item\' to th collection of \'items\'' do
+      it 'should add only once the input \'Item\' to the collection of \'items\'' do
         @new_label_req.add_item(@new_item)
         @new_label_req.add_item(@new_item)
         @new_label_req.add_item(@new_item)
