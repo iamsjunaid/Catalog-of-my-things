@@ -8,4 +8,3 @@ class Game < Item
     @multiplayer = params[:multiplayer]
     @last_played_at = Date.parse(params[:last_played_at])
   end
-end
