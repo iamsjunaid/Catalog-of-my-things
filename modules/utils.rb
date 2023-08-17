@@ -1,4 +1,5 @@
 require 'json'
+
 module Utils
   class FileHandler
     def initialize(params)
@@ -34,6 +35,10 @@ module Utils
       File.empty?(path)
     end
 
+    def parse(objs)
+      objs.map { |obj| JSON.parse(obj, { symbolize_names: true }) }
+    end
+
     def save(data, filename)
       make_dir(@data_folder) unless dir_exist?(@data_folder)
       opts = {
@@ -49,12 +54,13 @@ module Utils
       write_file(full_path(filename), file_content)
     end
 
-    def load
-      return [] unless file_exist?(full_path)
-      return [] if file_empty?(full_path)
+    def load(filename)
+      return [] unless file_exist?(full_path(filename))
+      return [] if file_empty?(full_path(filename))
 
-      file = read_file(full_path)
-      file.split("\n")
+      file = read_file(full_path(filename))
+      objs = JSON.parse(file)
+      parse(objs)
     end
   end
 end
