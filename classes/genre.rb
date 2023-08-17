@@ -24,4 +24,11 @@ class Genre
     ]
     properties.join(' | ')
   end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      name: @name
+    }
+  end
 end
