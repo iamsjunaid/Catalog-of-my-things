@@ -29,8 +29,8 @@ describe Label do
 
     context 'when creating a new \'Label\'' do
       it 'should create an instance of \'Label\' class' do
-        expect(@new_label_req).to be_an_instance_of Label
-        expect(@new_label_id).to be_an_instance_of Label
+        expect(@new_label_req).to be_an_instance_of(Label)
+        expect(@new_label_id).to be_an_instance_of(Label)
       end
 
       it 'should have a valid \'id\' not \'nil\' but an \'Integer\'' do
