@@ -151,6 +151,7 @@ class App
       execute(option) if (1..10).include?(option)
     end
     save(:albums)
+    save(:genres)
     exit
   end
 end
