@@ -1,17 +1,21 @@
 require_relative '../classes/genre'
 require_relative '../classes/music_album'
+require_relative '../classes/book'
+require_relative '../classes/label'
 
 class App
-  attr_reader :genres, :albums
+  attr_reader :genres, :albums, :books, :labels
 
   def initialize(params = { data_dir: 'data' })
     @data_dir = params[:data_dir]
     @genres = params[:genres] || load(:genres)
     @albums = params[:albums] || load(:albums)
+    @labels = params[:labels] || load(:labels)
+    @books = params[:books] || load(:books)
   end
 
   def load(collection)
-    [] if %i[genres albums].include?(collection)
+    [] if %i[genres albums labels books].include?(collection)
   end
 
   def ask_for(type, message)
@@ -85,7 +89,8 @@ class App
     puts "Create a #{type == :album ? 'music album' : type}"
     params = ask_parameters(type)
     instances = {
-      genre: Genre.new(params)
+      genre: Genre.new(params),
+      label: Label.new(params)
     }
 
     # create the type instance Book, MusicAlbum, Game
@@ -107,6 +112,8 @@ class App
     case type
     when :album
       MusicAlbum.new(params)
+    when :book
+      Book.new(params)
     end
   end
 
