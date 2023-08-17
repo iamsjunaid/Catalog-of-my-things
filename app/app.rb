@@ -1,7 +1,10 @@
 require_relative '../classes/genre'
 require_relative '../classes/music_album'
+require_relative '../modules/utils'
 
 class App
+  include Utils
+
   attr_reader :genres, :albums
 
   def initialize(params = { data_dir: 'data' })
@@ -12,6 +15,11 @@ class App
 
   def load(collection)
     [] if %i[genres albums].include?(collection)
+  end
+
+  def save(filename = :all)
+    file = FileHandler.new(folder: @data_dir)
+    file.save(send(filename), filename)
   end
 
   def ask_for(type, message)
@@ -142,6 +150,7 @@ class App
 
       execute(option) if (1..10).include?(option)
     end
+    save(:albums)
     exit
   end
 end
