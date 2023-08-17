@@ -28,4 +28,10 @@ class MusicAlbum < Item
 
     properties.join(' | ')
   end
+
+  def to_h(*_args)
+    super.merge({
+                  on_spotify: @on_spotify
+                })
+  end
 end
