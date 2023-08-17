@@ -21,7 +21,41 @@ class App
   end
 
   def load(collection)
-    [] if %i[genres albums labels books games authors].include?(collection)
+    [] unless %i[genres albums labels books games authors].include?(collection)
+
+    file = FileHandler.new(folder: @data_dir)
+    hash_objs = file.load(collection)
+    generate(collection, hash_objs)
+  end
+
+  def generate(collection, src_objs)
+    type = choose_type(collection)
+
+    return generate_instances(src_objs, type) if %i[genre author label].include?(type)
+
+    generate_items(src_objs, type)
+  end
+
+  def generate_items(params_collection, type)
+    params_collection.map do |params|
+      item = create_item(type, params)
+      p params
+    end
+  end
+
+  def generate_instances(params_collection, type)
+    params_collection.map { |params| create_instance(type, params) }
+  end
+
+  def create_instance(type, params)
+    case type
+    when :genre
+      Genre.new(params)
+    when :author
+      Author.new(params)
+    when :label
+      Label.new(params)
+    end
   end
 
   def save(filename = :all)
@@ -135,6 +169,10 @@ class App
     type.to_s.concat('s').to_sym
   end
 
+  def choose_type(target)
+    target.to_s.sub(/s$/, '').to_sym
+  end
+
   def menu
     options = %w[books music_albums games genres labels authors book music_album game exit]
     puts "\nWelcome to your [ Catalog of Things ]"
@@ -163,12 +201,12 @@ class App
 
       execute(option) if (1..10).include?(option)
     end
-    save(:albums)
-    save(:genres)
-    save(:books)
-    save(:labels)
-    save(:games)
     save(:authors)
+    save(:genres)
+    save(:labels)
+    save(:albums)
+    save(:books)
+    save(:games)
     exit
   end
 end
