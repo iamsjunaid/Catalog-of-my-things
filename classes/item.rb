@@ -31,4 +31,12 @@ class Item
     year = current_date.year - @publish_date.year
     year > 10
   end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      publish_date: @publish_date,
+      archived: @archived
+    }
+  end
 end
