@@ -14,6 +14,10 @@ class Author
     item.add_author(self)
   end
 
+  def to_json(*_args)
+    to_h.to_json
+  end
+
   private
 
   def to_s
@@ -24,5 +28,13 @@ class Author
       "items (count): #{@items.size}"
     ]
     properties.join(' | ')
+  end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      first_name: @first_name,
+      last_name: @last_name
+    }
   end
 end
