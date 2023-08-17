@@ -1,5 +1,5 @@
-require_relative '../classes/Book/book'
-require_relative '../classes/Book/label'
+require_relative '../classes/book'
+require_relative '../classes/label'
 
 describe Book do
   describe 'unit tests for \'Book\' class' do
