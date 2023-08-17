@@ -22,7 +22,8 @@ class Book < Item
       "publish_date: #{@publish_date}",
       "cover_state: #{@cover_state}",
       "publisher: #{@publisher}",
-      "archived?: #{@archived ? 'yes' : 'no'}"
+      "archived?: #{@archived ? 'yes' : 'no'}",
+      "\n          "
     ]
 
     properties.push("genre: #{@genre.name}") unless @genre.nil?
