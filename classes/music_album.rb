@@ -20,7 +20,7 @@ class MusicAlbum < Item
       "publish_date: #{@publish_date}",
       "on_spotify: #{@on_spotify ? 'yes' : 'no'}",
       "archived?: #{@archived ? 'yes' : 'no'}",
-      "\n          "
+      "\n       "
     ]
 
     properties.push("genre: #{@genre.name}") unless @genre.nil?

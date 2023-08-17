@@ -29,7 +29,7 @@ class Game < Item
       "last_played_at: #{@last_played_at}",
       "multiplayer: #{@multiplayer ? 'yes' : 'no'}",
       "archived?: #{@archived ? 'yes' : 'no'}",
-      "\n          "
+      "\n       "
     ]
 
     properties.push("genre: #{@genre.name}") unless @genre.nil?
