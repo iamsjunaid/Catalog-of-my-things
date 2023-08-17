@@ -1,4 +1,4 @@
 require_relative 'item'
 
-class Game < Item
+class Game < item
 end
