@@ -13,4 +13,15 @@ class Genre
 
     item.add_genre(self)
   end
+
+  private
+
+  def to_s
+    properties = [
+      "id: #{@id}",
+      "name: #{@name}",
+      "items (count): #{@items.size}"
+    ]
+    properties.join(' | ')
+  end
 end
