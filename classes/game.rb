@@ -12,7 +12,8 @@ class Game < Item
   private
 
   def can_be_archived?
-    super && last_played_old_enough?
+    # super && last_played_old_enough?
+    last_played_old_enough?
   end
 
   def last_played_old_enough?
