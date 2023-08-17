@@ -18,6 +18,10 @@ class Item
     @label = label
   end
 
+  def add_author(author)
+    @author = author
+  end
+
   def move_to_archive
     return unless can_be_archived?
 

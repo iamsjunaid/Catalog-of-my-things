@@ -21,3 +21,25 @@ CREATE TABLE music_albums (
   FOREIGN KEY (source_id) REFERENCES sources(id),
   FOREIGN KEY (label_id) REFERENCES labels(id)
 );
+
+-- Create the 'games' table
+CREATE TABLE games (
+  id SERIAL PRIMARY KEY,
+  publish_date DATE,
+  last_played_at DATE,
+  archived BOOLEAN
+  multiplayer BOOLEAN NOT NULL,
+  genre_id INT NOT NULL,
+  author_id INT NOT NULL,
+  label_id INT NOT NULL,
+  FOREIGN KEY (genre_id) REFERENCES genres(id),
+  FOREIGN KEY (author_id) REFERENCES authors(id),
+  FOREIGN KEY (label_id) REFERENCES labels(id)
+);
+
+-- Create the 'authors' table
+CREATE TABLE authors (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL
+);
