@@ -1,4 +1,4 @@
-require_relative '../item'
+require_relative 'item'
 
 class Book < Item
   attr_accessor :cover_state, :publisher
@@ -9,6 +9,8 @@ class Book < Item
     @cover_state = params[:cover_state] || 'good'
     @publisher = params[:publisher] || 'Unknown'
   end
+
+  private
 
   def can_be_archived?
     super || (@cover_state == 'bad')
