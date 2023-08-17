@@ -6,12 +6,12 @@ require_relative '../classes/book'
 require_relative '../classes/label'
 
 class App
-  attr_reader :genres, :albums, ,:books, :labels, :games, :authors
+  attr_reader :genres, :albums, :books, :labels, :games, :authors
 
   def initialize(params = { data_dir: 'data' })
     @data_dir = params[:data_dir]
     @genres = params[:genres] || load(:genres)
-    @albums = params[:albums] || load(:albums) 
+    @albums = params[:albums] || load(:albums)
     @games = params[:games] || load(:games)
     @authors = params[:authors] || load(:authors)
     @labels = params[:labels] || load(:labels)
