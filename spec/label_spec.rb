@@ -42,11 +42,9 @@ describe Label do
 
       it 'should have a valid \'title\' not \'nil\' but a \'String\'' do
         expect(@new_label_req.title).not_to be_nil
-        expect(@new_label_req.color).not_to be_nil
+        expect(@new_label_id.title).not_to be_nil
         expect(@new_label_req.title).to be_an_instance_of(String)
-        expect(@new_label_req.title).to be_an_instance_of(String)
-        expect(@new_label_req.color).to be_an_instance_of(String)
-        expect(@new_label_req.color).to be_an_instance_of(String)
+        expect(@new_label_id.title).to be_an_instance_of(String)
       end
 
       it 'should not have any \'items\'' do
