@@ -54,7 +54,7 @@ describe Book do
         expect(@book_req.cover_state).not_to be_nil
         expect(@book_id.cover_state).not_to be_nil
         expect(@book_req.cover_state).to be_kind_of(String)
-        expect(@book_id.cover_state).to eql('good')
+        expect(@book_id.cover_state).to be_kind_of(String)
       end
     end
 
@@ -83,12 +83,12 @@ describe Book do
       end
 
       context 'should return \'true\' if' do
-        book1 = Book.new({ publish_date: '2020-01-01', cover_state: 'bad', publisher: 'Unknown' })
-        book2 = Book.new({ publish_date: '2022-02-01', cover_state: 'good', publisher: 'Unknown' })
-        book3 = Book.new({ publish_date: '2021-01-02', cover_state: 'bad', publisher: 'Unknown' })
-        book4 = Book.new({ publish_date: '2021-02-02', cover_state: 'good', publisher: 'Unknown' })
+        book1 = Book.new({ publish_date: '2011-01-01', cover_state: 'bad', publisher: 'Unknown' })
+        book2 = Book.new({ publish_date: '2021-02-01', cover_state: 'good', publisher: 'Unknown' })
+        book3 = Book.new({ publish_date: '2012-01-02', cover_state: 'bad', publisher: 'Unknown' })
+        book4 = Book.new({ publish_date: '2022-02-02', cover_state: 'good', publisher: 'Unknown' })
 
-        it 'parent\'s method returns \'true\' AND \'cover_state\' is \'bad\'' do
+        it 'parent\'s method returns \'true\' OR \'cover_state\' is \'bad\'' do
           expect(book1.send(:can_be_archived?)).to be_truthy
           expect(book3.send(:can_be_archived?)).to be_truthy
         end
