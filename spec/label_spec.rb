@@ -1,4 +1,4 @@
-require_relative '../classes/book/label'
+require_relative '../classes/Book/label'
 require_relative '../classes/item'
 
 describe Label do
@@ -42,11 +42,9 @@ describe Label do
 
       it 'should have a valid \'title\' not \'nil\' but a \'String\'' do
         expect(@new_label_req.title).not_to be_nil
-        expect(@new_label_req.color).not_to be_nil
+        expect(@new_label_id.title).not_to be_nil
         expect(@new_label_req.title).to be_an_instance_of(String)
-        expect(@new_label_req.title).to be_an_instance_of(String)
-        expect(@new_label_req.color).to be_an_instance_of(String)
-        expect(@new_label_req.color).to be_an_instance_of(String)
+        expect(@new_label_id.title).to be_an_instance_of(String)
       end
 
       it 'should not have any \'items\'' do
@@ -72,7 +70,7 @@ describe Label do
         expect(@new_label_req.items).to include(@new_item)
       end
 
-      it 'should add only once the input \'Item\' to th collection of \'items\'' do
+      it 'should add only once the input \'Item\' to the collection of \'items\'' do
         @new_label_req.add_item(@new_item)
         @new_label_req.add_item(@new_item)
         @new_label_req.add_item(@new_item)
