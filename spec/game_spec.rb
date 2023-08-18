@@ -1,5 +1,3 @@
-require 'rspec'
-
 describe Game do
   let(:game_params) do
     {

@@ -1,4 +1,3 @@
-require 'rspec'
 describe Author do
   let(:author_params) { { first_name: 'John', last_name: 'Doe' } }
   let(:author) { Author.new(author_params) }
