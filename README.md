@@ -105,6 +105,11 @@ To run the tests, execute the following command:
 - GitHub: [@luigirazum](https://github.com/luigirazum)
 - LinkedIn: [Connect](https://www.linkedin.com/in/luiszubia/)
 
+👤 **Deborah**
+
+- GitHub: [@DebyGrey](https://github.com/DebyGrey)
+- LinkedIn: [Deborah Fashoro](https://www.linkedin.com/in/deborah-fashoro/)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
