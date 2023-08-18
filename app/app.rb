@@ -1,21 +1,25 @@
 require_relative '../classes/genre'
 require_relative '../classes/music_album'
+require_relative '../classes/game'
+require_relative '../classes/author'
 require_relative '../classes/book'
 require_relative '../classes/label'
 
 class App
-  attr_reader :genres, :albums, :books, :labels
+  attr_reader :genres, :albums, :books, :labels, :games, :authors
 
   def initialize(params = { data_dir: 'data' })
     @data_dir = params[:data_dir]
     @genres = params[:genres] || load(:genres)
     @albums = params[:albums] || load(:albums)
+    @games = params[:games] || load(:games)
+    @authors = params[:authors] || load(:authors)
     @labels = params[:labels] || load(:labels)
     @books = params[:books] || load(:books)
   end
 
   def load(collection)
-    [] if %i[genres albums labels books].include?(collection)
+    [] if %i[genres albums labels books games authors].include?(collection)
   end
 
   def ask_for(type, message)
@@ -90,6 +94,7 @@ class App
     params = ask_parameters(type)
     instances = {
       genre: Genre.new(params),
+      author: Author.new(params),
       label: Label.new(params)
     }
 
@@ -112,6 +117,8 @@ class App
     case type
     when :album
       MusicAlbum.new(params)
+    when :game
+      Game.new(params)
     when :book
       Book.new(params)
     end
