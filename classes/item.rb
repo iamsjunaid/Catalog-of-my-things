@@ -28,11 +28,28 @@ class Item
     @archived = true
   end
 
+  def to_json(*_args)
+    hash = to_h
+    hash[:genre_id] = @genre.id unless @genre.nil?
+    hash[:author_id] = @author.id unless @author.nil?
+    hash[:label_id] = @label.id unless @label.nil?
+
+    hash.to_json
+  end
+
   private
 
   def can_be_archived?
     current_date = Date.today
     year = current_date.year - @publish_date.year
     year > 10
+  end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      publish_date: @publish_date,
+      archived: @archived
+    }
   end
 end

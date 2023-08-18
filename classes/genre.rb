@@ -14,6 +14,10 @@ class Genre
     item.add_genre(self)
   end
 
+  def to_json(*_args)
+    to_h.to_json
+  end
+
   private
 
   def to_s
@@ -23,5 +27,12 @@ class Genre
       "items (count): #{@items.size}"
     ]
     properties.join(' | ')
+  end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      name: @name
+    }
   end
 end

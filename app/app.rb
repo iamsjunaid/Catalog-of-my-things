@@ -1,25 +1,32 @@
-require_relative '../classes/genre'
-require_relative '../classes/music_album'
-require_relative '../classes/game'
 require_relative '../classes/author'
-require_relative '../classes/book'
+require_relative '../classes/genre'
 require_relative '../classes/label'
+require_relative '../classes/book'
+require_relative '../classes/game'
+require_relative '../classes/music_album'
+require_relative '../modules/utils'
 
 class App
+  include Utils
   attr_reader :genres, :albums, :books, :labels, :games, :authors
 
   def initialize(params = { data_dir: 'data' })
     @data_dir = params[:data_dir]
-    @genres = params[:genres] || load(:genres)
-    @albums = params[:albums] || load(:albums)
-    @games = params[:games] || load(:games)
     @authors = params[:authors] || load(:authors)
+    @genres = params[:genres] || load(:genres)
     @labels = params[:labels] || load(:labels)
+    @albums = params[:albums] || load(:albums)
     @books = params[:books] || load(:books)
+    @games = params[:games] || load(:games)
   end
 
   def load(collection)
     [] if %i[genres albums labels books games authors].include?(collection)
+  end
+
+  def save(filename = :all)
+    file = FileHandler.new(folder: @data_dir)
+    file.save(send(filename), filename)
   end
 
   def ask_for(type, message)
@@ -156,6 +163,8 @@ class App
 
       execute(option) if (1..10).include?(option)
     end
+    save(:albums)
+    save(:genres)
     exit
   end
 end
