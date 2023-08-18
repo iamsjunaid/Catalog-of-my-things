@@ -1,3 +1,6 @@
+require_relative '../classes/game'
+require_relative '../classes/item'
+
 describe Game do
   let(:game_params) do
     {
