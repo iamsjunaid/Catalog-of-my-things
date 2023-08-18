@@ -38,10 +38,8 @@ CREATE TABLE books (
   cover_state VARCHAR(255),
   genre_id INT NOT NULL,
   author_id INT NOT NULL,
-  source_id INT NOT NULL,
   label_id INT NOT NULL,
   FOREIGN KEY (genre_id) REFERENCES genres(id),
   FOREIGN KEY (author_id) REFERENCES authors(id),
-  FOREIGN KEY (source_id) REFERENCES sources(id),
   FOREIGN KEY (label_id) REFERENCES labels(id)
 );
