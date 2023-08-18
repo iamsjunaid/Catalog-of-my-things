@@ -1,12 +1,8 @@
-require 'rspec'
-require_relative '../classes/game'
-require_relative '../classes/item'
-
 describe Game do
   let(:game_params) do
     {
       id: 1,
-      publish_date: '2020-01-01',
+      publish_date: '2011-01-01',
       last_played_at: '2023-01-01',
       multiplayer: true
     }
@@ -20,6 +16,17 @@ describe Game do
   end
 
   describe '#initialize' do
+    it 'should create an instance of \'Game\' class' do
+      expect(game).to be_an_instance_of(Game)
+    end
+
+    it 'sets default values for id, published_date, last_played_at and multiplayer' do
+      expect(game.id).to be_a(Integer)
+      expect(game.publish_date).to be_a(Date)
+      expect(game.last_played_at).to be_a(Date)
+      expect(game.multiplayer).to be_a(TrueClass) || be_a(FalseClass)
+    end
+
     it 'sets the multiplayer attribute' do
       expect(game.multiplayer).to eq(game_params[:multiplayer])
     end
@@ -30,20 +37,33 @@ describe Game do
   end
 
   describe '#can_be_archived?' do
-    context 'when last played recently' do
-      it 'returns false' do
-        allow(Date).to receive(:today).and_return(Date.new(2023, 8, 1))
-        game.last_played_at = Date.new(2023, 8, 1)
-        expect(game.send(:can_be_archived?)).to be_falsey
-      end
+    it 'returns true if parent method returns true and if last_played_at is older than 2 years' do
+      game.last_played_at = Date.new(2020, 1, 1)
+      expect(game.send(:can_be_archived?)).to be_truthy
     end
 
-    context 'when last played more than 2 years ago' do
-      it 'returns true' do
-        allow(Date).to receive(:today).and_return(Date.new(2025, 1, 1))
-        game.last_played_at = Date.new(2023, 1, 1)
-        expect(game.send(:can_be_archived?)).to be_truthy
-      end
+    it 'otherwise it will return false' do
+      game2 = Game.new({
+                         id: 1,
+                         publish_date: '2011-01-01',
+                         last_played_at: '2021-01-01',
+                         multiplayer: true
+                       })
+      game3 = Game.new({
+                         id: 1,
+                         publish_date: '2020-01-01',
+                         last_played_at: '2021-01-01',
+                         multiplayer: true
+                       })
+      game4 = Game.new({
+                         id: 1,
+                         publish_date: '2020-01-01',
+                         last_played_at: '2024-01-01',
+                         multiplayer: true
+                       })
+      expect(game2.send(:can_be_archived?)).to be_falsey
+      expect(game3.send(:can_be_archived?)).to be_falsey
+      expect(game4.send(:can_be_archived?)).to be_falsey
     end
   end
 

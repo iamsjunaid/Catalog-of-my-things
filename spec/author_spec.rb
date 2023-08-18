@@ -1,25 +1,39 @@
-require 'rspec'
-require_relative '../classes/author' # Make sure to adjust the path to the actual location of your Author class
-
 describe Author do
   let(:author_params) { { first_name: 'John', last_name: 'Doe' } }
   let(:author) { Author.new(author_params) }
   let(:item) { double('item') }
 
   describe '#initialize' do
+    it 'should create an instance of \'Author\' class' do
+      expect(author).to be_an_instance_of(Author)
+    end
+
     it 'sets default values for id and items' do
       expect(author.id).to be_a(Integer)
+      expect(author.items).to be_a(Array)
       expect(author.items).to be_empty
     end
 
     it 'sets first_name and last_name' do
       expect(author.first_name).to eq('John')
+      expect(author.first_name).to be_a(String)
       expect(author.last_name).to eq('Doe')
+      expect(author.last_name).to be_a(String)
     end
 
     it 'sets provided id' do
       author_with_id = Author.new(author_params.merge(id: 123))
       expect(author_with_id.id).to eq(123)
+    end
+
+    it 'sets provided first name' do
+      author_with_first_name = Author.new(author_params.merge(first_name: 'John'))
+      expect(author_with_first_name.first_name).to eq('John')
+    end
+
+    it 'sets provided last name' do
+      author_with_last_name = Author.new(author_params.merge(last_name: 'Doe'))
+      expect(author_with_last_name.last_name).to eq('Doe')
     end
   end
 

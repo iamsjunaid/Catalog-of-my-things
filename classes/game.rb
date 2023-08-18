@@ -11,15 +11,15 @@ class Game < Item
 
   private
 
+  # Overrides the can_be_archived? method from the parent class
   def can_be_archived?
-    # super && last_played_old_enough?
-    last_played_old_enough?
+    super && last_played_old_enough?
   end
 
   def last_played_old_enough?
     current_date = Date.today
     years_since_last_played = current_date.year - @last_played_at.year
-    years_since_last_played >= 2
+    years_since_last_played > 2
   end
 
   def to_s
