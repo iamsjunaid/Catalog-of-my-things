@@ -37,4 +37,11 @@ class Game < Item
 
     properties.join(' | ')
   end
+
+  def to_h(*_args)
+    super.merge({
+                  multiplayer: @multiplayer,
+                  last_played_at: @last_played_at
+                })
+  end
 end

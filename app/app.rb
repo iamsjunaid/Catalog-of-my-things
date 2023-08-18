@@ -165,6 +165,8 @@ class App
     end
     save(:albums)
     save(:genres)
+    save(:games)
+    save(:authors)
     exit
   end
 end
