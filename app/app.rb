@@ -165,6 +165,8 @@ class App
     end
     save(:albums)
     save(:genres)
+    save(:books)
+    save(:labels)
     exit
   end
 end
