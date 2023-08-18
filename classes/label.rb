@@ -14,6 +14,10 @@ class Label
     item.add_label(self)
   end
 
+  def to_json(*_args)
+    to_h.to_json
+  end
+
   private
 
   def to_s
@@ -24,5 +28,13 @@ class Label
       "items (count): #{@items.size}"
     ]
     properties.join(' | ')
+  end
+
+  def to_h(*_args)
+    {
+      id: @id,
+      color: @color,
+      title: @title
+    }
   end
 end
