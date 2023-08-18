@@ -31,4 +31,11 @@ class Book < Item
 
     properties.join(' | ')
   end
+
+  def to_h(*_args)
+    super.merge({
+                  cover_state: @cover_state,
+                  publisher: @publisher
+                })
+  end
 end
